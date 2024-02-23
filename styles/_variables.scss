@@ -1,0 +1,16 @@
+:root{
+  --maximum-width: 100vw;
+  --default-padding: 2rem;
+  --default-radius: 0.5rem;
+  --color-white: #fff;
+  --bright-blue: hsl(220, 98%, 61%);
+  --very-light-gray: hsl(0, 0%, 98%);
+  --very-light-grayish-blue: hsl(236, 33%, 92%);
+  --very-dark-blue: hsl(235, 21%, 11%);
+  --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+  --light-grayish-blue: hsl(234, 39%, 85%);
+  --light-grayish-blue:hover: hsl(236, 33%, 92%);
+  --dark-grayish-blue: hsl(234, 11%, 52%);
+  --very-dark-grayish-blue: hsl(233, 14%, 35%);
+  --check-background: linear-gradient(0deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}

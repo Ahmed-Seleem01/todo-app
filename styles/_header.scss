@@ -1,0 +1,35 @@
+@use 'mixins';
+
+.header {
+  position: relative;
+  color: var(--color-white);
+  // @include mixins.flex-style;
+  border: 1px solid;
+  min-height: 30vh;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: calc(var(--default-padding)*-1);
+    width: 100vw;
+    height: 100%;
+    background: url('../images/bg-mobile-light.jpg');
+    z-index: -1;
+  }
+  
+  &__header-container {
+    @include mixins.flex-style;
+    justify-content: space-between;
+    margin-top: calc(var(--default-padding) * 2);
+    border: 1px solid;
+  }
+
+  &__theme-img{
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+  }
+  &__title {
+    letter-spacing: 1rem;
+  }
+}

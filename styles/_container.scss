@@ -1,0 +1,7 @@
+@use './mixins';
+
+.container{
+  max-width: var(--maximum-width);
+  padding: 0 var(--default-padding);
+  // @include mixins.flex-style(column);
+}
