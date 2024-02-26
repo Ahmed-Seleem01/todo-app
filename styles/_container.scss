@@ -1,7 +1,35 @@
-@use './mixins';
+@use "./mixins";
 
-.container{
-  max-width: var(--maximum-width);
-  padding: 0 var(--default-padding);
-  // @include mixins.flex-style(column);
+.container {
+  @include mixins.flex-style(column, $align-items: center);
+  max-width: var(--mobile-width);
+  min-height: 100vh;
+  color: var(--dark-grayish-blue);
+  margin: 0 auto;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    background-color: var(--very-light-grayish-blue);
+    z-index: -1;
+  }
+
+  @include mixins.desktop-screen {
+    max-width: var(--desktop-width);
+    font-size: 1.8rem;
+  }
+
+  &--isDark {
+    --very-light-gray: var(--very-dark-desaturated-blue);
+    --dark-grayish-blue: var(--very-dark-grayish-blue-dark-theme);
+    --very-dark-grayish-blue: var(--light-grayish-blue-dark-theme);
+    --very-light-grayish-blue: var(--very-dark-blue);
+    --light-grayish-blue: var(--very-dark-grayish-blue-dark-theme);
+  }
 }

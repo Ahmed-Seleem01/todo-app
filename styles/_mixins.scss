@@ -1,7 +1,20 @@
-@mixin flex-style($direction: row, $gap: 2rem){
+@mixin flex-style($direction: row, $gap: 0, $justify-content: flex-start, $align-items: stretch) {
   display: flex;
   flex-direction: $direction;
-  align-items: center;
-  justify-content: center;
-  gap: $gap
+  justify-content: $justify-content;
+  align-items: $align-items;
+  gap: $gap;
 }
+
+@mixin bg-img-setup($url, $size: contain){
+  background-image: url($url);
+  background-size: $size;
+  background-repeat: no-repeat;
+}
+
+@mixin desktop-screen {
+  @media (min-width: 560px) {
+    @content;
+  }
+}
+

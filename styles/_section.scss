@@ -1,51 +1,165 @@
-@use 'mixins';
+@use "mixins";
 
-%set-todo-box {
-  width: 100%;
-  height: 5rem;
-  background-color: var(--color-white);
+%set-box {
+  @include mixins.flex-style($gap: 1rem, $align-items: center);
+  height: 5.2rem;
   border-radius: var(--default-radius);
-  @include mixins.flex-style;
-  justify-content: flex-start;
+  padding: calc(var(--default-padding) * 0.25) var(--default-padding);
+
+  @include mixins.desktop-screen {
+    height: 6.5rem;
+  }
+}
+
+%set-shadow {
+  box-shadow: 0rem 0rem 1rem 0.2rem #1a1a1a22;
+}
+
+%set-colors {
+  background-color: var(--very-light-gray);
+  color: var(--dark-grayish-blue);
 }
 
 .section {
-  @include mixins.flex-style(column);
-  margin-top: calc(var(--default-padding) *-4);
+  align-self: stretch;
+  @include mixins.flex-style(column, $gap: 1.6rem);
+  margin-top: calc(var(--default-padding) * -4.8);
+  position: relative;
+
+  @include mixins.desktop-screen {
+    margin-top: calc(var(--default-padding) * -7);
+  }
 
   &__create-todo {
-    @extend %set-todo-box;
-    padding: 1rem;
+    @extend %set-box;
+    @extend %set-shadow;
+    @extend %set-colors;
+  }
+
+  &__add-todo-button {
+    &:hover {
+      color: var(--very-dark-grayish-blue);
+    }
   }
 
   &__check-button {
-    display: inline-block;
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background-color: transparent;
-    border: 2px solid var(--very-dark-grayish-blue);
+    background-color: var(--light-grayish-blue);
+    position: relative;
+    @include mixins.flex-style($align-items: center, $justify-content: center);
+
+    &:hover {
+      background-image: var(--check-background);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      @include mixins.bg-img-setup("../images/icon-check.svg");
+      width: 0.8rem;
+      height: 0.8rem;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      width: 1.8rem;
+      height: 1.8rem;
+      background-color: var(--very-light-gray);
+      border-radius: 50%;
+    }
+
+    &--isChecked {
+      background-image: var(--check-background);
+
+      &::after {
+        display: none;
+      }
+    }
   }
 
   &__todo-input {
     flex: 1;
-    max-width: 100%;
     height: 100%;
     outline: 0;
     border: none;
-    font-size: 1.8rem;
+    font-weight: 600;
+    @extend %set-colors;
+    color: var(--very-dark-grayish-blue);
+
+    &::placeholder {
+      color: var(--dark-grayish-blue);
+    }
   }
 
   &__list {
-    width: 100%;
-    border: 1px solid;
+    @extend %set-shadow;
+    border-radius: var(--default-radius);
+    overflow: hidden;
   }
 
   &__list-item {
-    @extend %set-todo-box;
+    @extend %set-box;
+    @extend %set-colors;
+    border-radius: 0;
+    border-bottom: 0.5px solid var(--light-grayish-blue);
+
+    &:hover {
+      cursor: pointer;
+      .section__delete-button {
+        opacity: 1;
+      }
+    }
 
     &:last-child {
       justify-content: space-between;
+      font-weight: 600;
+      font-size: 1.3rem;
+      border: none;
+    }
+  }
+
+  &__todo {
+    color: var(--very-dark-grayish-blue);
+  }
+
+  &__todo-text {
+    flex: 1;
+  }
+
+  &__delete-button {
+    width: 1.5rem;
+    height: 1.5rem;
+    @include mixins.bg-img-setup("../images/icon-cross.svg");
+    opacity: 0;
+    transition: opacity var(--transition-timing) ease-in-out;
+  }
+  &__clear-completed {
+    &:hover {
+      color: var(--very-dark-grayish-blue);
+    }
+  }
+
+  &__filter-items {
+    @extend %set-box;
+    @extend %set-shadow;
+    @extend %set-colors;
+    gap: 2rem;
+    font-size: 1.6rem;
+    justify-content: center;
+
+    :hover {
+      color: var(--very-dark-grayish-blue);
+    }
+  }
+
+  &__filter-option {
+    &:first-of-type {
+      color: var(--bright-blue);
     }
   }
 }

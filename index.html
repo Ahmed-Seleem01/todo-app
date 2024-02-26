@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,39 +19,42 @@
         <div class="header__header-container">
           <h1 class="header__title">Todo</h1>
           <div class="header__toggle-feature">
-            <lable for="header__toggle-theme">
-              <img
-                class="header__theme-img"
-                src="./images/icon-moon.svg"
-                alt=""
-              />
-            </lable>
-            <input
-              class="header__toggle-input"
-              id="toggle-theme"
-              type="checkbox"
-            />
+            <button class="header__toggle-theme-button">
+        
+            </button>
           </div>
         </div>
       </header>
 
       <section class="section">
         <div class="section__create-todo">
-          <button
-            class="section__check-button"
-            for="section__check-box"
-          ></button>
-
+          <button class="section__check-button"></button>
           <input
             class="section__todo-input"
             type="text"
-            placeholder="Create new todo..."
+            placeholder="Create a new todo..."
           />
+          <button class="section__add-todo-button">Add</button>
         </div>
         <ul class="section__list">
+          <li class="section__list-item section__todo">
+            <button class="section__check-button"></button>
+            <p class="section__todo-text">Jog around the park 3x</p>
+            <button class="section__delete-button"></button>
+          </li>
+          <li class="section__list-item section__todo">
+            <button class="section__check-button"></button>
+            <p class="section__todo-text">Lorem ipsum dolor</p>
+            <button class="section__delete-button"></button>
+          </li>
+          <li class="section__list-item section__todo">
+            <button class="section__check-button"></button>
+            <p class="section__todo-text">Lorem ipsum dolor</p>
+            <button class="section__delete-button"></button>
+          </li>
           <li class="section__list-item">
             <span class="section__items-left">
-              <span class="section__items-num">5</span>items left
+              <span class="section__items-num">5 </span>items left
             </span>
             <button class="section__clear-completed">Clear Completed</button>
           </li>
@@ -72,5 +75,7 @@
         >Frontend Mentor</a
       >. Coded by <a href="#">Your Name Here</a>.
     </div>
+
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
