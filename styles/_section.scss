@@ -36,12 +36,6 @@
     @extend %set-colors;
   }
 
-  &__add-todo-button {
-    &:hover {
-      color: var(--very-dark-grayish-blue);
-    }
-  }
-
   &__check-button {
     width: 2rem;
     height: 2rem;
@@ -82,6 +76,14 @@
     }
   }
 
+  &__form {
+    flex: 1;
+    @include mixins.flex-style(
+      $align-items: center,
+      $justify-content: space-between
+    );
+  }
+
   &__todo-input {
     flex: 1;
     height: 100%;
@@ -93,6 +95,12 @@
 
     &::placeholder {
       color: var(--dark-grayish-blue);
+    }
+  }
+
+  &__add-todo-button {
+    &:hover {
+      color: var(--very-dark-grayish-blue);
     }
   }
 
@@ -129,6 +137,11 @@
 
   &__todo-text {
     flex: 1;
+
+    &--isDone {
+      text-decoration: line-through;
+      color: var(--dark-grayish-blue);
+    }
   }
 
   &__delete-button {
@@ -137,6 +150,10 @@
     @include mixins.bg-img-setup("../images/icon-cross.svg");
     opacity: 0;
     transition: opacity var(--transition-timing) ease-in-out;
+
+    &:focus {
+      opacity: 1;
+    }
   }
   &__clear-completed {
     &:hover {
@@ -158,7 +175,7 @@
   }
 
   &__filter-option {
-    &:first-of-type {
+    &--isSelected {
       color: var(--bright-blue);
     }
   }

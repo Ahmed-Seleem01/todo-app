@@ -19,9 +19,7 @@
         <div class="header__header-container">
           <h1 class="header__title">Todo</h1>
           <div class="header__toggle-feature">
-            <button class="header__toggle-theme-button">
-        
-            </button>
+            <button class="header__toggle-theme-button"></button>
           </div>
         </div>
       </header>
@@ -29,38 +27,26 @@
       <section class="section">
         <div class="section__create-todo">
           <button class="section__check-button"></button>
-          <input
-            class="section__todo-input"
-            type="text"
-            placeholder="Create a new todo..."
-          />
-          <button class="section__add-todo-button">Add</button>
+          <form class="section__form">
+            <input
+              name="todo-input"
+              class="section__todo-input"
+              type="text"
+              placeholder="Create a new todo..."
+            />
+            <button type="submit" class="section__add-todo-button">Add</button>
+          </form>
         </div>
         <ul class="section__list">
-          <li class="section__list-item section__todo">
-            <button class="section__check-button"></button>
-            <p class="section__todo-text">Jog around the park 3x</p>
-            <button class="section__delete-button"></button>
-          </li>
-          <li class="section__list-item section__todo">
-            <button class="section__check-button"></button>
-            <p class="section__todo-text">Lorem ipsum dolor</p>
-            <button class="section__delete-button"></button>
-          </li>
-          <li class="section__list-item section__todo">
-            <button class="section__check-button"></button>
-            <p class="section__todo-text">Lorem ipsum dolor</p>
-            <button class="section__delete-button"></button>
-          </li>
           <li class="section__list-item">
             <span class="section__items-left">
-              <span class="section__items-num">5 </span>items left
+              <span class="section__items-num">0 </span>items left
             </span>
             <button class="section__clear-completed">Clear Completed</button>
           </li>
         </ul>
         <div class="section__filter-items">
-          <button class="section__filter-option">All</button>
+          <button class="section__filter-option section__filter-option--isSelected">All</button>
           <button class="section__filter-option">Active</button>
           <button class="section__filter-option">Completed</button>
         </div>
@@ -76,6 +62,6 @@
       >. Coded by <a href="#">Your Name Here</a>.
     </div>
 
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" type="module"></script>
   </body>
 </html>
