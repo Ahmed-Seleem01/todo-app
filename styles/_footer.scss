@@ -8,4 +8,14 @@
   text-align: center;
   margin: 0 auto;
   padding: 1rem;
+  position: absolute;
+  // color: var(--very-dark-desaturated-blue);
+  color: var(--very-dark-grayish-blue);
+  font-size: 1.2rem;
+}
+
+html:has(.container--isDark) {
+  .attribution {
+    color: var(--very-light-gray);
+  }
 }
