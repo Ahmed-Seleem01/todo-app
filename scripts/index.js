@@ -1,37 +1,12 @@
 import {
-  addTodoElm, checkButtonElm, containerElm, filterButtonElms, todoInputElm, toggleThemeButton,
-} from './elements';
-import createTodo, { filterItems } from './todo';
+  listenAddButton, listenCheckedInput, listenFilterButtons, listenToggleTheme, listenULList,
+} from './listeners';
 
-toggleThemeButton.addEventListener('click', () => {
-  containerElm.classList.toggle('container--isDark');
-});
-
-checkButtonElm.addEventListener('click', () => {
-  checkButtonElm.classList.toggle('section__check-button--isChecked');
-});
-
-const resetInput = () => {
-  checkButtonElm.classList.remove('section__check-button--isChecked');
-  todoInputElm.value = '';
-};
-
-addTodoElm.addEventListener('click', (event) => {
-  event.preventDefault();
-  const isChecked = checkButtonElm.classList.contains('section__check-button--isChecked');
-  createTodo(todoInputElm.value, isChecked);
-  resetInput();
-});
-
-filterButtonElms.forEach((filterButton, index) => {
-  filterButton.addEventListener('click', (e) => {
-    filterButtonElms.forEach((elm) => {
-      elm.classList.remove('section__filter-option--isSelected');
-      e.target.classList.add('section__filter-option--isSelected');
-    });
-    filterItems(index);
-  });
-});
+listenToggleTheme();
+listenCheckedInput();
+listenAddButton();
+listenULList();
+listenFilterButtons();
 
 /*
 [x] View the optimal layout for the app depending on their device's screen size

@@ -20,6 +20,14 @@
   color: var(--dark-grayish-blue);
 }
 
+%check-button {
+  background-image: var(--check-background);
+
+  &::after {
+    display: none;
+  }
+}
+
 .section {
   align-self: stretch;
   @include mixins.flex-style(column, $gap: 1.6rem);
@@ -68,11 +76,7 @@
     }
 
     &--isChecked {
-      background-image: var(--check-background);
-
-      &::after {
-        display: none;
-      }
+      @extend %check-button;
     }
   }
 
@@ -108,6 +112,24 @@
     @extend %set-shadow;
     border-radius: var(--default-radius);
     overflow: hidden;
+
+    &--all {
+      .section__todo {
+        display: flex;
+      }
+    }
+
+    &--active {
+      .section__todo.section__todo--active {
+        display: flex;
+      }
+    }
+
+    &--completed {
+      .section__todo.section__todo--completed {
+        display: flex;
+      }
+    }
   }
 
   &__list-item {
@@ -116,11 +138,8 @@
     border-radius: 0;
     border-bottom: 0.5px solid var(--light-grayish-blue);
 
-    &:hover {
-      cursor: pointer;
-      .section__delete-button {
-        opacity: 1;
-      }
+    &--disappeared {
+      display: none;
     }
 
     &:last-child {
@@ -133,15 +152,28 @@
 
   &__todo {
     color: var(--very-dark-grayish-blue);
+    display: none;
+
+    &:hover {
+      cursor: pointer;
+      .section__delete-button {
+        opacity: 1;
+      }
+    }
+
+    &--completed {
+      .section__check-button {
+        @extend %check-button;
+      }
+      .section__todo-text {
+        text-decoration: line-through;
+        color: var(--dark-grayish-blue);
+      }
+    }
   }
 
   &__todo-text {
     flex: 1;
-
-    &--isDone {
-      text-decoration: line-through;
-      color: var(--dark-grayish-blue);
-    }
   }
 
   &__delete-button {
