@@ -5,9 +5,11 @@ import {
 
 // Get the todos items if is stored in local storage
 const storedData = JSON.parse(localStorage.getItem('storedTodo'));
+const toggleTheme = JSON.parse(localStorage.getItem('toggleTheme'));
 let todoList = storedData || [];
+const isDark = toggleTheme;
 
-initiateOnStart(todoList);
+initiateOnStart(todoList, isDark);
 
 export function createTodo(inputValue, checkValue) {
   const todoValue = inputValue;

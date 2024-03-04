@@ -1,4 +1,4 @@
-import { unorderedListElm } from './elements';
+import { containerElm, unorderedListElm } from './elements';
 
 const filterActiveTodosLength = (todoArr) => todoArr.filter((todo) => !todo.isChecked).length;
 
@@ -23,11 +23,14 @@ const renderList = (todoListItems) => {
   unorderedListElm.innerHTML = htmlContent;
 };
 
-const saveToDB = (key, value) => {
+export const saveToDB = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const initiateOnStart = (todoList) => {
+export const initiateOnStart = (todoList, isDark) => {
+  if (isDark) {
+    containerElm.classList.add('container--isDark');
+  }
   renderList(todoList);
 };
 

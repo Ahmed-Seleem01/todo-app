@@ -2,6 +2,7 @@ import {
   addTodoElm,
   checkButtonElm, containerElm, filterButtonElms, todoInputElm, toggleThemeButton, unorderedListElm,
 } from './elements';
+import { saveToDB } from './helperFunctions';
 import {
   clearCompletedItems, createTodo, deleteTodo, filterItems, markComplete, reorderTop,
 } from './todo';
@@ -14,6 +15,8 @@ const resetInput = () => {
 export function listenToggleTheme() {
   toggleThemeButton.addEventListener('click', () => {
     containerElm.classList.toggle('container--isDark');
+    const toggleState = containerElm.classList.contains('container--isDark');
+    saveToDB('toggleTheme', toggleState);
   });
 }
 
