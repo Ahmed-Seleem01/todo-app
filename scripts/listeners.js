@@ -37,7 +37,7 @@ export function listenULList() {
 // Handle the actions of each list item
 // Using the parent element to not repeat event listener on each list item
   unorderedListElm.addEventListener('click', (e) => {
-    const { position } = e.target.dataset;
+    const { position } = e.target.parentElement.dataset;
     if (e.target.classList.contains('section__check-button')) markComplete(position);
     else if (e.target.classList.contains('section__delete-button')) deleteTodo(position);
     else if (e.target.classList.contains('section__clear-completed')) clearCompletedItems();
@@ -63,12 +63,13 @@ export function listenDragAndDrop() {
     if (!event.target.classList.contains('section__todo')) return;
 
     draggingElement = event.target;
+    draggingElement.classList.add('section__todo--dragging');
     console.dir(draggingElement);
     event.dataTransfer.setData('text/plain', ''); // Required for Firefox
   });
 
   unorderedListElm.addEventListener('dragend', (event) => {
-    // draggingElement.classList.remove("dragging");
+    draggingElement.classList.remove('section__todo--dragging');
     const { position } = draggingElement.dataset;
     const { position: dragOverPosition } = dragOverElement.dataset;
     reorderTop(position, dragOverPosition);

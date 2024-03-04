@@ -45,8 +45,8 @@
   }
 
   &__check-button {
-    width: 2rem;
-    height: 2rem;
+    width: 2.2rem;
+    height: 2.2rem;
     border-radius: 50%;
     background-color: var(--light-grayish-blue);
     position: relative;
@@ -63,6 +63,7 @@
       @include mixins.bg-img-setup("../images/icon-check.svg");
       width: 50%;
       height: 50%;
+      transform: translate(0.05rem, 0.02rem);
     }
 
     &::after {
@@ -73,6 +74,7 @@
       height: 90%;
       background-color: var(--very-light-gray);
       border-radius: 50%;
+      transform: translate(0.05rem, 0rem);
     }
 
     &--isChecked {
@@ -169,6 +171,11 @@
         text-decoration: line-through;
         color: var(--dark-grayish-blue);
       }
+    }
+
+    &--dragging {
+      cursor: grab;
+      opacity: 0.2;
     }
   }
 

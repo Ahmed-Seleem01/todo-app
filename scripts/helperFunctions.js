@@ -6,9 +6,9 @@ const renderList = (todoListItems) => {
   let htmlContent = '';
   todoListItems.forEach((todo, index) => {
     htmlContent += `<li data-position=${index} class="section__list-item section__todo ${todo.isChecked ? 'section__todo--completed' : 'section__todo--active'}" draggable="true">
-        <button data-position=${index} class="section__check-button"></button>
+        <button class="section__check-button"></button>
         <p class="section__todo-text">${todo.todoValue}</p>
-        <button data-position=${index} class="section__delete-button"></button>
+        <button class="section__delete-button"></button>
     </li>`;
   });
 
