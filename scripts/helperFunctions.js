@@ -5,7 +5,7 @@ const filterActiveTodosLength = (todoArr) => todoArr.filter((todo) => !todo.isCh
 const renderList = (todoListItems) => {
   let htmlContent = '';
   todoListItems.forEach((todo, index) => {
-    htmlContent += `<li class="section__list-item section__todo ${todo.isChecked ? 'section__todo--completed' : 'section__todo--active'}">
+    htmlContent += `<li data-position=${index} class="section__list-item section__todo ${todo.isChecked ? 'section__todo--completed' : 'section__todo--active'}" draggable="true">
         <button data-position=${index} class="section__check-button"></button>
         <p class="section__todo-text">${todo.todoValue}</p>
         <button data-position=${index} class="section__delete-button"></button>

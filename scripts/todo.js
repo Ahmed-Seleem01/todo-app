@@ -50,3 +50,13 @@ export function filterItems(position) {
     }
   }
 }
+
+export const reorderTop = (position, dragOverPosition) => {
+  console.log(position);
+  console.log(dragOverPosition);
+  const todoItem = todoList[position];
+  todoList.splice(position, 1);
+  todoList.splice(position - 1, 0, todoItem);
+  localStorage.setItem('storedTodo', JSON.stringify(todoList));
+  console.log(todoList);
+};

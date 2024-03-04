@@ -3,7 +3,7 @@ import {
   checkButtonElm, containerElm, filterButtonElms, todoInputElm, toggleThemeButton, unorderedListElm,
 } from './elements';
 import {
-  clearCompletedItems, createTodo, deleteTodo, filterItems, markComplete,
+  clearCompletedItems, createTodo, deleteTodo, filterItems, markComplete, reorderTop,
 } from './todo';
 
 const resetInput = () => {
@@ -52,5 +52,48 @@ export function listenFilterButtons() {
       filterButton.classList.add('section__filter-option--isSelected');
       filterItems(index);
     });
+  });
+}
+
+export function listenDragAndDrop() {
+  let draggingElement = null;
+  let dragOverElement = null;
+
+  unorderedListElm.addEventListener('dragstart', (event) => {
+    if (!event.target.classList.contains('section__todo')) return;
+
+    draggingElement = event.target;
+    console.dir(draggingElement);
+    event.dataTransfer.setData('text/plain', ''); // Required for Firefox
+  });
+
+  unorderedListElm.addEventListener('dragend', (event) => {
+    // draggingElement.classList.remove("dragging");
+    const { position } = draggingElement.dataset;
+    const { position: dragOverPosition } = dragOverElement.dataset;
+    reorderTop(position, dragOverPosition);
+    // console.log(event.target)
+    draggingElement = null;
+    dragOverElement = null;
+  });
+
+  unorderedListElm.addEventListener('dragover', (event) => {
+    if (!event.target.classList.contains('section__todo')) return;
+
+    // console.log(draggingElement);
+    dragOverElement = event.target;
+    event.preventDefault();
+    const boundingRect = event.target.getBoundingClientRect();
+    const offset = boundingRect.y + boundingRect.height / 2;
+    if (event.clientY - offset > 0) {
+      event.target.parentNode.insertBefore(
+        draggingElement,
+        event.target.nextSibling,
+      );
+
+      // reorderBottom(position);
+    } else {
+      event.target.parentNode.insertBefore(draggingElement, event.target);
+    }
   });
 }

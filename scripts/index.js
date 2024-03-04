@@ -1,5 +1,7 @@
 import {
-  listenAddButton, listenCheckedInput, listenFilterButtons, listenToggleTheme, listenULList,
+  listenAddButton, listenCheckedInput,
+  listenDragAndDrop, listenFilterButtons,
+  listenToggleTheme, listenULList,
 } from './listeners';
 
 listenToggleTheme();
@@ -7,6 +9,7 @@ listenCheckedInput();
 listenAddButton();
 listenULList();
 listenFilterButtons();
+listenDragAndDrop();
 
 /*
 [x] View the optimal layout for the app depending on their device's screen size
