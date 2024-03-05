@@ -61,43 +61,36 @@ export function listenFilterButtons() {
 export function listenDragAndDrop() {
   let draggingElement = null;
   let dragOverElement = null;
+  let direction = '';
 
   unorderedListElm.addEventListener('dragstart', (event) => {
-    if (!event.target.classList.contains('section__todo')) return;
-
     draggingElement = event.target;
+    if (!draggingElement.classList.contains('section__todo')) return;
+
     draggingElement.classList.add('section__todo--dragging');
-    console.dir(draggingElement);
     event.dataTransfer.setData('text/plain', ''); // Required for Firefox
   });
 
-  unorderedListElm.addEventListener('dragend', (event) => {
-    draggingElement.classList.remove('section__todo--dragging');
-    const { position } = draggingElement.dataset;
-    const { position: dragOverPosition } = dragOverElement.dataset;
-    reorderTop(position, dragOverPosition);
-    // console.log(event.target)
-    draggingElement = null;
-    dragOverElement = null;
-  });
-
   unorderedListElm.addEventListener('dragover', (event) => {
-    if (!event.target.classList.contains('section__todo')) return;
-
-    // console.log(draggingElement);
     dragOverElement = event.target;
+    if (!dragOverElement.classList.contains('section__todo')) return;
+
     event.preventDefault();
-    const boundingRect = event.target.getBoundingClientRect();
+    const boundingRect = dragOverElement.getBoundingClientRect();
     const offset = boundingRect.y + boundingRect.height / 2;
     if (event.clientY - offset > 0) {
-      event.target.parentNode.insertBefore(
-        draggingElement,
-        event.target.nextSibling,
-      );
-
-      // reorderBottom(position);
+      direction = 'bottom';
     } else {
-      event.target.parentNode.insertBefore(draggingElement, event.target);
+      direction = 'top';
     }
+  });
+
+  unorderedListElm.addEventListener('dragend', () => {
+    const { position } = draggingElement.dataset;
+    const { position: dragOverPosition } = dragOverElement.dataset;
+    reorderTop(position, dragOverPosition, direction);
+    draggingElement.classList.remove('section__todo--dragging');
+    draggingElement = null;
+    dragOverElement = null;
   });
 }

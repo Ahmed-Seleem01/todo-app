@@ -53,12 +53,21 @@ export function filterItems(position) {
   }
 }
 
-export const reorderTop = (position, dragOverPosition) => {
-  console.log(position);
-  console.log(dragOverPosition);
+export const reorderTop = (position, dragOverPosition, direction) => {
   const todoItem = todoList[position];
-  todoList.splice(position, 1);
-  todoList.splice(position - 1, 0, todoItem);
-  localStorage.setItem('storedTodo', JSON.stringify(todoList));
-  console.log(todoList);
+
+  if (position < dragOverPosition && direction === 'top') {
+    todoList.splice(dragOverPosition, 0, todoItem);
+    todoList.splice(position, 1);
+  } else if (position < dragOverPosition && direction === 'bottom') {
+    todoList.splice(Number(dragOverPosition) + 1, 0, todoItem);
+    todoList.splice(position, 1);
+  } else if (position > dragOverPosition && direction === 'top') {
+    todoList.splice(dragOverPosition, 0, todoItem);
+    todoList.splice(Number(position) + 1, 1);
+  } else if (position > dragOverPosition && direction === 'bottom') {
+    todoList.splice(Number(dragOverPosition) + 1, 0, todoItem);
+    todoList.splice(Number(position) + 1, 1);
+  }
+  updateListOnModify(todoList);
 };
