@@ -63,15 +63,16 @@ export function listenDragAndDrop() {
   let dragOverElement = null;
   let direction = '';
 
-  unorderedListElm.addEventListener('dragstart', (event) => {
+  // Handlers for mouse
+  const dragStartHandler = (event) => {
     draggingElement = event.target;
     if (!draggingElement.classList.contains('section__todo')) return;
 
     draggingElement.classList.add('section__todo--dragging');
     event.dataTransfer.setData('text/plain', ''); // Required for Firefox
-  });
+  };
 
-  unorderedListElm.addEventListener('dragover', (event) => {
+  const dragOverHandler = (event) => {
     dragOverElement = event.target;
     if (!dragOverElement.classList.contains('section__todo')) return;
 
@@ -83,14 +84,59 @@ export function listenDragAndDrop() {
     } else {
       direction = 'top';
     }
-  });
+  };
 
-  unorderedListElm.addEventListener('dragend', () => {
+  const dragEndHandler = () => {
     const { position } = draggingElement.dataset;
     const { position: dragOverPosition } = dragOverElement.dataset;
     reorderTop(position, dragOverPosition, direction);
     draggingElement.classList.remove('section__todo--dragging');
     draggingElement = null;
     dragOverElement = null;
-  });
+  };
+
+  unorderedListElm.addEventListener('dragstart', dragStartHandler);
+  unorderedListElm.addEventListener('dragover', dragOverHandler);
+  unorderedListElm.addEventListener('dragend', dragEndHandler);
+
+  // Handlers for touch screen
+  function onTouchStart(event) {
+    const touch = event.touches[0];
+    draggingElement = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (!draggingElement.classList.contains('section__todo')) return;
+    draggingElement.classList.add('section__todo--dragging');
+  }
+
+  function onTouchMove(event) {
+    event.preventDefault();
+    const touch = event.touches[0];
+    dragOverElement = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (!dragOverElement.classList.contains('section__todo')) return;
+    const boundingRect = dragOverElement.getBoundingClientRect();
+    const offset = boundingRect.y + (boundingRect.height / 2);
+    if (touch.clientY - offset > 0) {
+      direction = 'bottom';
+    } else {
+      direction = 'top';
+    }
+  }
+
+  function onTouchEnd() {
+    const { position } = draggingElement.dataset;
+    const { position: dragOverPosition } = dragOverElement.dataset;
+    reorderTop(position, dragOverPosition, direction);
+    draggingElement.classList.remove('section__todo--dragging');
+    draggingElement = null;
+    dragOverElement = null;
+  }
+
+  unorderedListElm.addEventListener('touchstart', onTouchStart);
+  unorderedListElm.addEventListener('touchmove', onTouchMove);
+  unorderedListElm.addEventListener('touchend', onTouchEnd);
+
+  // document.querySelectorAll('.section__todo').forEach((item) => {
+  //   item.addEventListener('touchstart', onTouchStart);
+  //   item.addEventListener('touchend', onTouchEnd);
+  //   item.addEventListener('touchmove', onTouchMove);
+  // });
 }
