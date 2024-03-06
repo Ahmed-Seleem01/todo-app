@@ -114,6 +114,9 @@
     @extend %set-shadow;
     border-radius: var(--default-radius);
     overflow: hidden;
+    background-color: var(--very-light-gray);
+    position: relative;
+    z-index: 0;
 
     &--all {
       .section__todo {
@@ -155,7 +158,7 @@
   &__todo {
     color: var(--very-dark-grayish-blue);
     display: none;
-    transition: opacity 0.2s ease-in-out;
+    background-color: transparent;
 
     &:hover {
       cursor: pointer;
@@ -176,14 +179,17 @@
 
     &--dragging {
       cursor: grab;
-      opacity: 0.2;
+      // opacity: 0.2;
     }
   }
 
   &__todo-text {
     flex: 1;
-    user-select: none;
+    // user-select: none;
     background-color: transparent;
+    position: relative;
+    z-index: -1;
+    overflow-x: auto;
   }
 
   &__delete-button {
@@ -210,9 +216,11 @@
     gap: 2rem;
     font-size: 1.6rem;
     justify-content: center;
-
-    :hover {
-      color: var(--very-dark-grayish-blue);
+    
+    @include mixins.desktop-screen {
+      :hover {
+        color: var(--very-dark-grayish-blue);
+      }
     }
   }
 

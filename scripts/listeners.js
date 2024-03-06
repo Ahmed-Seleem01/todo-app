@@ -114,6 +114,10 @@ export function listenDragAndDrop() {
     if (!dragOverElement.classList.contains('section__todo')) return;
     const boundingRect = dragOverElement.getBoundingClientRect();
     const offset = boundingRect.y + (boundingRect.height / 2);
+    const listTop = unorderedListElm.getBoundingClientRect().y;
+    const { position } = draggingElement.dataset;
+    draggingElement.style.transform = `translateY(${(touch.clientY - listTop + 10) - (position * 50)}px)`;
+
     if (touch.clientY - offset > 0) {
       direction = 'bottom';
     } else {
@@ -122,6 +126,7 @@ export function listenDragAndDrop() {
   }
 
   function onTouchEnd() {
+    if (!draggingElement || !dragOverElement) return;
     const { position } = draggingElement.dataset;
     const { position: dragOverPosition } = dragOverElement.dataset;
     reorderTop(position, dragOverPosition, direction);
