@@ -179,17 +179,17 @@
 
     &--dragging {
       cursor: grab;
-      // opacity: 0.2;
+      opacity: 0.5;
     }
   }
 
   &__todo-text {
     flex: 1;
-    // user-select: none;
     background-color: transparent;
     position: relative;
     z-index: -1;
     overflow-x: auto;
+    overflow-wrap: break-word;
   }
 
   &__delete-button {
@@ -216,7 +216,7 @@
     gap: 2rem;
     font-size: 1.6rem;
     justify-content: center;
-    
+
     @include mixins.desktop-screen {
       :hover {
         color: var(--very-dark-grayish-blue);
