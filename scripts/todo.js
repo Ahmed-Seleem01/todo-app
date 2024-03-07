@@ -26,8 +26,11 @@ export function markComplete(position) {
 }
 
 export function deleteTodo(position) {
-  todoList.splice(position, 1);
-  updateListOnModify(todoList);
+  const isDelete = confirm('Are you sure to delete?');
+  if (isDelete) {
+    todoList.splice(position, 1);
+    updateListOnModify(todoList);
+  }
 }
 
 export function clearCompletedItems() {
